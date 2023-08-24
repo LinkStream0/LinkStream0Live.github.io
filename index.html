@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Transmisión en Vivo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  
+  <!-- Estilos -->
+  <style>
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500&display=swap');
+
+    /* Estilos Generales */
+    body {
+      
+    }
+    
+    .modal {
+      background: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      margin: 0;
+      font-family: 'ZCOOL KuaiLe', cursive; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  /* Imagen de fondo */
+  background-image: url('https://dl.dropbox.com/scl/fi/mlog281lj2lfu5z8w8cuh/The_Walking_Dead.jpg?rlkey=n2xgppgegfaegl60zmz0zawtd');
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-color: rgba(0,0,0,0.5);
+  background-attachment: fixed;
+
+    }
+
+    .container {
+      height: 100vh;  
+      display: grid;
+      align-items: center;
+      justify-content: center;
+    }
+       #liveVideo{
+     width: 100%;
+   height: 40vh;
+   max-height: 60vh;
+   border: 1px solid #2c3e50; 
+   }
+   #liveButton{
+      display: none;
+      padding: 7px 14px;
+      margin: 10px;
+      border: none;
+      background-color:;
+      opacity: 0.9;
+      color: #00aaff;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease-in-out;
+      border-radius : 5px;
+      position: absolute;
+      left: 0;
+   }
+  #liveButton i{
+   color:red;
+   animation: color 0.8s infinite ;
+   
+}
+@keyframes color{
+   to{color:red;}
+   from{color:black;}
+}
+/* Estilos para mobile */
+@media (max-width: 480px) {
+
+   .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+   }
+   #liveVideo{
+     width: 100%;
+   height: 40vh;
+   max-height: 60vh;
+   border: 1px solid #2c3e50; 
+   }
+#liveButton {
+    position: fixed;
+    bottom: initial;
+    right: initial;
+  }
+
+}
+
+/* Estilos para tablets */
+@media (max-width: 768px) {
+
+  .container {
+    padding: 10px;
+  }
+  
+  h1 {
+     color: gold ;
+    font-size: 32px;
+  }
+   #liveVideo{
+     width: 100%;
+   height: 40vh;
+   max-height: 60vh;
+   border: 1px solid #2c3e50; 
+   }
+  #streamStarts,
+  #streamEnds {
+    font-size: 22px;
+  }
+  
+}
+    /* Video */
+    /* Etiqueta media para tablets */
+    @media (max-width: 1024px) {
+      /* Agrega estilos específicos para tablets */
+    }
+    video {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0px 2px 12px rgba(0,0,0,0.4);
+    }
+
+    /* Botón Pantalla Completa */
+    #fullscreenButton {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: white;
+      color: #555;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #fullscreenButton:hover {
+      transform: scale(1.1); 
+    }
+
+
+.info {
+   background: rgba(255, 255, 255, 0.1);
+   border-radius: 20px;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+   padding: 40px;
+   background: rgba(91, 0, 96, 0.3);
+}
+    /* Textos de Estado */
+    #streamStarts, 
+    #streamEnds {
+       color: white ;
+      font-size: 18px;
+      text-align: center;
+     -webkit-text-stroke : 0.4px white ;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      /* Estilos responsivos */
+    }
+/* 1. Transiciones más suaves en hover */
+#fullscreenButton:hover,
+#liveButton:hover {
+  transition: all 0.3s ease-out;
+}
+
+/* 2. Iconos más modernos */
+#fullscreenButton {
+  /* Icono de HeroIcons */
+} 
+
+#liveButton {
+  /* Icono de TeenyIcons */ 
+}
+
+/* 5. Loader animado */
+.loader {
+  /* Spinner animado */
+  display: flex; 
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 7. Dark mode toggle */
+.dark-mode {
+  /* Cambia colores de fondo, texto, sombras, etc */ 
+}
+
+.dark-mode-toggle {
+  /* Switch/toggle */
+  position: absolute;
+  top: 20px;
+  right: 20px; 
+}
+
+/* 8. Animaciones de texto */
+@keyframes typing {
+  /* Animación typing */
+}
+
+#streamStarts,
+#streamEnds {
+  animation: typing 2s steps(30); 
+}
+#streamEnds{
+   color: lightyellow;
+   background: rgba(20,50,100,0.7);
+   background: tomato;
+   padding: 10px 15px ;
+   font-size: 13px ;
+   -webkit-text-stroke:0.11px white;
+   font-family: 'Bebas Neue', cursive;
+}
+/* 10. Efectos hover */  
+#liveButton:hover {
+  transform: scale(1.1) rotate(-2deg);
+  box-shadow: 0px 12px 24px rgba(0,0,0,0.2);
+}
+
+/* 12. Fade in al cargar */
+body {
+  animation: fadeIn 0.5s ease-out; 
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+  </style>
+
+</head>
+
+<body>
+          
+     <div class="modal" id="myModal">
+
+  <div class="container">
+<span>
+    <button id="liveButton">
+      <i class="fas fa-video"></i>
+      En Vivo
+    </button>
+
+    <video id="liveVideo" poster="https://dl.dropbox.com/scl/fi/mlog281lj2lfu5z8w8cuh/The_Walking_Dead.jpg?rlkey=n2xgppgegfaegl60zmz0zawtd"   src=""></video>
+</span>
+    <button id="fullscreenButton">
+      <i class="fas fa-expand"></i>
+    </button>
+
+   
+    <div class="info">
+      <h1>The Walking Dead</h1>
+      <p id="streamStarts">Serie post-apocaliptica donde un grupo lucha por sobrevivir en un mundo infestado de zombies.</p>
+      <p id="streamEnds" >Siguiente Capitulo a las 8:00pm</p> 
+    </div>
+
+  </div>
+</div>
+</body>
+    <script src="https://dl.dropbox.com/scl/fi/onrlekoupu7yzxqdu27t3/enVivo.js?rlkey=gkdpnmo6cmqsfdkq4rs1f837k"></script>
+    <!-- Tus scripts aquí -->
+    <script src="https://dl.dropbox.com/scl/fi/skvl2cqp5rlppnooomqba/enVivoBanderines.js?rlkey=15t98nfa32l8ol75rrdyycvjh"></script>
+<script>
+   var video = document.getElementById("liveVideo");
+   var fullscreenButton = document.getElementById("fullscreenButton");
+
+   fullscreenButton.addEventListener("click", function() {
+      if (video.requestFullscreen) {
+         video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) { // Firefox
+         video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) { // Chrome, Safari y Opera
+         video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { // Internet Explorer / Microsoft Edge
+         video.msRequestFullscreen();
+      }
+   });
+</script>
+</html>
