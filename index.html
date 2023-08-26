@@ -44,7 +44,7 @@
   background-blend-mode: multiply;
   background-color: rgba(0,0,0,0.5);
   background-attachment: fixed;
-
+overflow: auto ;
     }
 
     .container {
@@ -55,21 +55,21 @@
     }
        #liveVideo{
      width: 100%;
-   height: 40vh;
-   max-height: 60vh;
+   height: auto;
+   max-height: auto;
    border: 1px solid #2c3e50; 
    }
    #liveButton{
       display: none;
-      padding: 7px 14px;
-      margin: 10px;
+      padding: 7px 7px;
+      margin: 1px;
       border: none;
       background-color:;
       opacity: 0.9;
       color: #00aaff;
       cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
+      border-radius: 25px;
+      font-size: 5px;
       transition: background-color 0.3s ease-in-out;
       border-radius : 5px;
       position: absolute;
@@ -78,6 +78,7 @@
   #liveButton i{
    color:red;
    animation: color 0.8s infinite ;
+   font-size: 10px ;
    
 }
 @keyframes color{
@@ -94,8 +95,8 @@
    }
    #liveVideo{
      width: 100%;
-   height: 40vh;
-   max-height: 60vh;
+   height: auto;
+   max-height: auto;
    border: 1px solid #2c3e50; 
    }
 #liveButton {
@@ -103,7 +104,11 @@
     bottom: initial;
     right: initial;
   }
-
+    #customControtls { width: 100%; position: absolute;  left: 50%; transform: translateX(-50%);  text-align: center; display: flex; align-items: center; }
+    #customControls button { background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin: 0 10px; opacity:1; }
+    #customControls button:focus { outline: none; color: gray;}
+    #timeDisplay { color: white; font-size: 12px; margin: auto 10px; }
+  
 }
 
 /* Estilos para tablets */
@@ -119,20 +124,29 @@
   }
    #liveVideo{
      width: 100%;
-   height: 40vh;
-   max-height: 60vh;
+   height:auto ;
+   max-height: auto;
    border: 1px solid #2c3e50; 
    }
   #streamStarts,
   #streamEnds {
     font-size: 22px;
   }
+      #customControtls { width: 100%; position: absolute;  left: 50%; transform: translateX(-50%);  text-align: center; display: flex; align-items: center; }
+    #customControls button { background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin: 0 10px; opacity:1; }
+    #customControls button:focus { outline: none; }
+    #timeDisplay { color: white; font-size: 12px; margin: 0 10px; }
   
 }
     /* Video */
     /* Etiqueta media para tablets */
     @media (max-width: 1024px) {
       /* Agrega estilos específicos para tablets */
+          #customControtls { width: 100%; position: absolute;  left: 50%; transform: translateX(-50%);  text-align: center; display: flex; align-items: center; }
+    #customControls button { background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin: 0 10px; opacity:1; }
+    #customControls button:focus { outline: none; }
+    #timeDisplay { color: white; font-size: 12px; margin: 0 10px; }
+  
     }
     video {
       max-width: 100%;
@@ -142,9 +156,7 @@
 
     /* Botón Pantalla Completa */
     #fullscreenButton {
-      position: fixed;
-      top: 30px;
-      right: 30px;
+      
       width: 45px;
       height: 45px;
       border-radius: 50%;
@@ -250,43 +262,138 @@ body {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+section {
+   display: flex ;
+   margin-top: 5px;
+   text-align: center;
+   position: relative;
+}
+#tituloP {
+   font-size: 28px;
+   font-weight: bold;
+   margin-bottom: 0px;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 
+
+section h5 {
+   font-size: 10px;
+   color: #00aaff;
+   margin-bottom: 5px;
+}
+/***nuevos clases video controles**/
+    #videoContainer { position: relative; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: transparent; }
+    #videoBackground { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; pointer-events: none; }
+    #videoC { position: relative; width: 100%; height: 100%; display: grid; justify-content: center; align-items: center; }
+    #loadingSpinner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 36px; color: white; }
+    #customControls { width: 100%; position: absolute; top: 0px; left: 50%; transform: translateX(-50%);  text-align: center; display: flex; align-items: center; z-index: 1;
+       background: rgba(0,0,0,0.2);
+    }
+    #customControls button { background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin: 0 10px; opacity:1; }
+    #customControls button:focus { outline: none; }
+    #timeDisplay { color: white; font-size: 12px; margin: auto 20px; }
+      #liveIndicator { font-size: 9px ; display: none; 
+       margin: auto 10px;
+    }
+    .opaciti{
+       opacity: 1;
+       animation: opaci 1s ease-out;
+    }
+    @keyframes opaci{
+       0%{
+          opacity:1;
+       }
+       100%{opacity:0;}
+    }
+
+   
   </style>
 
 </head>
 
 <body>
-          
+  
      <div class="modal" id="myModal">
 
-  <div class="container">
+  <div class="container" >
+<span id="videoContainer">
+  
+<span id="videoC">
+     <button id="liveButton">
+       <i class="fas fa-video"></i>
+    </button>
+      <span id="b">
+    <video id="liveVideo" poster="https://dl.dropbox.com/scl/fi/mlog281lj2lfu5z8w8cuh/The_Walking_Dead.jpg?rlkey=n2xgppgegfaegl60zmz0zawtd" muted  src="">
+       <source src="R.mp" type="video/mp4">
+       Tu navegador no admite el elemento de video.
+    </video>
+                        <!--controles-->
+<div id="customControls" style="display:none">
+           <button id="muteButton"><i class="fas fa-volume-mute"></i></button>
+           <button id="playPauseButton"><i class="fas fa-play"></i></button>
+           <span id="timeDisplay">00:00 / 00:00</span>
+           <button id="fullscreenButton"><i class="fas fa-expand"></i></button>
+          <!------<span id="liveIndicator"><i class="fas fa-circle"></i> En Vivo</span>--->
+        </div>
+        
+        <!--Spiner carga-->
+                <div id="loadingSpinner" style="display: flex;"><i class="fas fa-spinner fa-spin"></i></div>
 <span>
-    <button id="liveButton">
-      <i class="fas fa-video"></i>
-      En Vivo
-    </button>
+    </span>
 
-    <video id="liveVideo" poster="https://dl.dropbox.com/scl/fi/mlog281lj2lfu5z8w8cuh/The_Walking_Dead.jpg?rlkey=n2xgppgegfaegl60zmz0zawtd"   src=""></video>
 </span>
-    <button id="fullscreenButton">
-      <i class="fas fa-expand"></i>
-    </button>
+  
 
    
     <div class="info">
-      <h1>The Walking Dead</h1>
+          <section>
+<h1 id="tituloP">The Walking Dead</h1>
+      <h5>Cap2 T1</h5>
+   </section>
+      
       <p id="streamStarts">Serie post-apocaliptica donde un grupo lucha por sobrevivir en un mundo infestado de zombies.</p>
       <p id="streamEnds" >Siguiente Capitulo a las 8:00pm</p> 
     </div>
 
   </div>
 </div>
+      
 </body>
-    <script src="https://dl.dropbox.com/scl/fi/onrlekoupu7yzxqdu27t3/enVivo.js?rlkey=gkdpnmo6cmqsfdkq4rs1f837k"></script>
+    <script src="https://dl.dropbox.com/scl/fi/qw5jfp8xn9i8oou54xstj/envivo.js?rlkey=ye19rai8m0l0qtjf7ntir9ghh"></script>
     <!-- Tus scripts aquí -->
-    <script src="https://dl.dropbox.com/scl/fi/skvl2cqp5rlppnooomqba/enVivoBanderines.js?rlkey=15t98nfa32l8ol75rrdyycvjh"></script>
+    <script src="https://dl.dropbox.com/scl/fi/6zted44opkjp80rpjcn8v/banderinesEnvivo.js?rlkey=yoxo77vq5bq6fqhjpxll6kslc"></script>
+    <script src="https://dl.dropbox.com/scl/fi/lmnqp01xl2bnoaj3ehu6t/videoControles.js?rlkey=3na6rb9h4fy7yttormwqcct6o"></script>
 <script>
-   var video = document.getElementById("liveVideo");
+liveVideo.addEventListener('loadeddata', () => {
+  // liveIndicator.style.display = 'inline';
+    loadingSpinner.style.display = 'none';
+   customControls.style.display = 'flex';
+   if (!liveVideo.pause) {
+      liveVideo.play();
+   }
+   
+   const timeDisplay = document.getElementById('timeDisplay');
+   liveVideo.addEventListener('timeupdate', () => {
+   const currentTime = formatTime(liveVideo.currentTime);
+   const duration = formatTime(liveVideo.duration);
+   timeDisplay.textContent = `${currentTime} / ${duration}`;
+});
+function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        }
+})
+
+        
+   
+yy=  localStorage.getItem('enlace_actual'); // Guardar la URL en el almacenamiento local
+   liveVideo.src= yy;
+      function f(){
+     liveVideo.play();
+}
+  
+   var video = document.getElementById("videoC");
    var fullscreenButton = document.getElementById("fullscreenButton");
 
    fullscreenButton.addEventListener("click", function() {
@@ -300,5 +407,6 @@ body {
          video.msRequestFullscreen();
       }
    });
+   
 </script>
-</html>
+             </html>
